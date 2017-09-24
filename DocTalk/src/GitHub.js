@@ -10,8 +10,9 @@ $.getJSON("https://api.github.com/users", {
 	for (var i = 0; i < allUserData.length; i++) {
 		fullNamesAndUserName[i] = new Array(3);
 	}
-	for (var j = 0; j < 2; j++) {
+	for (var j = 0; j < 10; j++) {
 	//for (var j = 0; j < allUserData.length; j++) {
+		//Rate Controller Problem
 		fullNamesAndUserName[j][0] = allUserData[j].login;
 		var k = 0;
 		$.getJSON("https://api.github.com/users/" + fullNamesAndUserName[j][0],
@@ -29,7 +30,8 @@ $.getJSON("https://api.github.com/users", {
 setInterval(function(){
 	$("#searchterm").keyup(function(e) {
 //		if(numberOfResponses==allUserData.length){
-		if(numberOfResponses==2){
+		//Rate Controller Problem
+		if(numberOfResponses==10){
 			console.log("Fullanmes"+fullNamesAndUserName);
 		var inputPattern = $("#searchterm").val();
 						var searchedUsers = [];
