@@ -1,17 +1,16 @@
 var allUserData;
 var fullNamesAndUserName;
 var numberOfResponses = 0;
-$.getJSON("https://api.github.com/users", {
-	aynsc : false
-}, function(data) {
+$.getJSON("https://api.github.com/users", 
+ function(data) {
 	console.log(data);
 	allUserData = data;
 	fullNamesAndUserName = new Array(allUserData.length);
 	for (var i = 0; i < allUserData.length; i++) {
 		fullNamesAndUserName[i] = new Array(3);
 	}
-	for (var j = 0; j < 10; j++) {
-	//for (var j = 0; j < allUserData.length; j++) {
+	//for (var j = 0; j < 10; j++) {
+	for (var j = 0; j < allUserData.length; j++) {
 		//Rate Controller Problem
 		fullNamesAndUserName[j][0] = allUserData[j].login;
 		var k = 0;
@@ -27,13 +26,13 @@ $.getJSON("https://api.github.com/users", {
 	
 });
 
-setInterval(function(){
 	$("#searchterm").keyup(function(e) {
-//		if(numberOfResponses==allUserData.length){
 		//Rate Controller Problem
-		if(numberOfResponses==10){
+		$("#results").empty();
+		if(numberOfResponses==allUserData.length){
 			console.log("Fullanmes"+fullNamesAndUserName);
 		var inputPattern = $("#searchterm").val();
+		if(inputPattern=="" || inputPattern==null) return;
 						var searchedUsers = [];
 						var count = 0;
 						for (i = 0; i < fullNamesAndUserName.length; i++) {
@@ -47,10 +46,7 @@ setInterval(function(){
 		}
 		var searchedUsers =searchedUsers.sort(function(a,b){ return a[1] > b[1] ? 1 : -1; });
 		searchedUsers.forEach(function(data) {
-			$("#results").empty();
-			$('#results').append(data[0]);
+			$('#results').append(data[0]+"<br>");
 			console.log(searchedUsers);
 		});}
 	});	
-	
-},1000);
